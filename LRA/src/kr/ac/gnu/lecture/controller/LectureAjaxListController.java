@@ -28,7 +28,7 @@ public class LectureAjaxListController implements Controller {
 		try{
  			out=response.getWriter();
  		}catch(IOException e) { 
- 			throw new RuntimeException("���μ�������~"); 
+ 			throw new RuntimeException("실행중 오류발생"); 
  		}
 	 	try {	
 			LectureServiceFacade sf=LectureServiceFacadeImpl.getInstance();

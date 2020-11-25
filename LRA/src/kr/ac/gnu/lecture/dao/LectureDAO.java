@@ -8,7 +8,7 @@ import kr.ac.gnu.lecture.to.LectureBean;
 
 
 public interface LectureDAO {
-	public List<LectureBean> lectureList() throws DataAccessException ;
-	public List<LectureBean> findLecture(String id) throws DataAccessException ;
-	public List<KeywordBean> getKeywordList();
+	public List<LectureBean> selectLectureList() throws DataAccessException ;
+	public List<LectureBean> selectLecture(String id) throws DataAccessException ;
+	public List<KeywordBean> selectKeywordList();
 }

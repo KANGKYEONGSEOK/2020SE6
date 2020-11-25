@@ -66,9 +66,9 @@ for(LectureBean bean:list){
 	String s_id=bean.getId();
 	out.print("<tr style='border: 1px solid navy'>");
 	   //for(int a=0; a>6; a++){
-		   out.print("<td>"+bean.getRank()+"</td>");
-		   out.print("<td>"+bean.getName()+"</td>");
-		   out.print("<td><a href="+bean.getLink()+">"+bean.getLink()+"</a></td>");
+		   out.print("<td>"+bean.getLectureRank()+"</td>");
+		   out.print("<td>"+bean.getLectureName()+"</td>");
+		   out.print("<td><a href="+bean.getLectureLink()+">"+bean.getLectureLink()+"</a></td>");
 		   out.print("<td><input type=button value=추천취소 class=c_cancel_button id=cancel_"+bean.getId()+"></td>");
 		   
 	  // }

@@ -17,13 +17,13 @@ public class LectureServiceFacadeImpl implements LectureServiceFacade{
 	@Override
 	public List<LectureBean> getLectureList() {
 		// TODO Auto-generated method stub
-		return LectureDAOImpl.getInstance().lectureList();
+		return LectureDAOImpl.getInstance().selectLectureList();
 	}
 
 	@Override
 	public List<LectureBean>  getLecture(String lectureKeyword) throws LectureNonExistentException {
 		// TODO Auto-generated method stub
-		List<LectureBean> lectureBeans = LectureDAOImpl.getInstance().findLecture(lectureKeyword);
+		List<LectureBean> lectureBeans = LectureDAOImpl.getInstance().selectLecture(lectureKeyword);
 		if(lectureBeans==null || lectureBeans.size()<=0) { 
 			throw new LectureNonExistentException("존재하지 않는 강의 검색어 입니다.");
 		}
@@ -31,7 +31,7 @@ public class LectureServiceFacadeImpl implements LectureServiceFacade{
 	}
 	@Override
 	public List<KeywordBean> getKeywordList(){
-		List<KeywordBean> keywordBeans = LectureDAOImpl.getInstance().getKeywordList();
+		List<KeywordBean> keywordBeans = LectureDAOImpl.getInstance().selectKeywordList();
 		return keywordBeans;
 		
 	}

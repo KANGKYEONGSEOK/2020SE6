@@ -25,11 +25,10 @@ public class LectureInfoController implements Controller {
 		ModelAndView mav=null;
 	 	try {		
 			LectureServiceFacade sf=LectureServiceFacadeImpl.getInstance();
-			List<LectureBean> list=sf.getLecture(request.getParameter("lectureKeyword"));
-	 		 map.put("lectureList", list);
+	 		map.put("lectureList", sf.getLecture(request.getParameter("lectureKeyword")));
 	 		request.setAttribute("Keyword", request.getParameter("lectureKeyword"));
-	 		 mav=new ModelAndView(viewName,map);
-	 		 map.put("errorCode", 0);
+	 		mav=new ModelAndView(viewName,map);
+	 		map.put("errorCode", 0);
 	 		map.put("errorMsg", "success");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

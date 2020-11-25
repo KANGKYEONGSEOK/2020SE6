@@ -15,20 +15,25 @@ import kr.ac.gnu.lecture.to.LectureBean;
 
 /*  LectureDAO 
  *  Lecture과 관련된 조회, 수정, 생성, 변경이 일어나는 클래스
- *  
- * 
+ *  LECTURE 테이블과 관련된 DAO
  */
 public class LectureDAOImpl implements LectureDAO{
-	private static LectureDAOImpl i;
+	private static LectureDAOImpl instance;
 	private LectureDAOImpl(){}
 	public static LectureDAO getInstance(){
-		if(i==null) i=new LectureDAOImpl();
-		return i;
+		if(instance==null) {
+			instance=new LectureDAOImpl();
+		}
+		return instance;
 	}
 
-	public List<LectureBean> lectureList(){
+	/*
+	 * 강의 리스트 조회 메서드
+	 * return : 강의리스트 
+	 */
+	public List<LectureBean> selectLectureList(){
 		// TODO Auto-generated method stub
-		List<LectureBean> v=new ArrayList<LectureBean>();
+		List<LectureBean> lectureList =new ArrayList<LectureBean>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
@@ -42,14 +47,14 @@ public class LectureDAOImpl implements LectureDAO{
 			while(rs.next()){
 				LectureBean lecture=new LectureBean();
 				lecture.setId(rs.getString("ID"));
-				lecture.setKeyword(rs.getString("LECTURE_KEYWORD"));
-				lecture.setName(rs.getString("LECTURE_NAME"));
-				lecture.setRank(Integer.parseInt(rs.getString("LECTURE_RANK")));
-				lecture.setLink(rs.getString("LECUTRN_LINK"));
-				lecture.setCancelYN(rs.getString("LECTURE_CANCEL_YN"));
-				v.add(lecture);
+				lecture.setLectureKeyword(rs.getString("LECTURE_KEYWORD"));
+				lecture.setLectureName(rs.getString("LECTURE_NAME"));
+				lecture.setLectureRank(Integer.parseInt(rs.getString("LECTURE_RANK")));
+				lecture.setLectureLink(rs.getString("LECUTRN_LINK"));
+				lecture.setLectureCancelYN(rs.getString("LECTURE_CANCEL_YN"));
+				lectureList.add(lecture);
 			}
-			return v;
+			return lectureList;
 		} catch(Exception sqle) {
 			throw new DataAccessException(sqle.getMessage());			
 		} finally {
@@ -61,8 +66,12 @@ public class LectureDAOImpl implements LectureDAO{
 		}
 	}
 	
+	/*
+	 * 강의 검색어에 해당하는 강의 리스트 조회 메서드
+	 * return : 강의리스트 
+	 */
 	@Override
-	public  List<LectureBean> findLecture(String lectureKeyword) throws DataAccessException {
+	public  List<LectureBean> selectLecture(String lectureKeyword) throws DataAccessException {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -80,11 +89,11 @@ public class LectureDAOImpl implements LectureDAO{
 			while(rs.next()){
 				lecture=new LectureBean();
 				lecture.setId(rs.getString("ID"));
-				lecture.setKeyword(rs.getString("LECTURE_KEYWORD"));
-				lecture.setName(rs.getString("LECTURE_NAME"));
-				lecture.setRank(Integer.parseInt(rs.getString("LECTURE_RANK")));
-				lecture.setLink(rs.getString("LECUTRN_LINK"));
-				lecture.setCancelYN(rs.getString("LECTURE_CANCEL_YN"));
+				lecture.setLectureKeyword(rs.getString("LECTURE_KEYWORD"));
+				lecture.setLectureName(rs.getString("LECTURE_NAME"));
+				lecture.setLectureRank(Integer.parseInt(rs.getString("LECTURE_RANK")));
+				lecture.setLectureLink(rs.getString("LECUTRN_LINK"));
+				lecture.setLectureCancelYN(rs.getString("LECTURE_CANCEL_YN"));
 				lectureList.add(lecture);
 			}
 			return lectureList;
@@ -99,8 +108,13 @@ public class LectureDAOImpl implements LectureDAO{
 			}catch(Exception e){}		
 		}
 	}
+	
+	/*
+	 * 강의 검색어 조회 메서드
+	 * return : 강의검색어 리스트 
+	 */
 	@Override
-	public List<KeywordBean> getKeywordList(){
+	public List<KeywordBean> selectKeywordList(){
 		List<KeywordBean> v=new ArrayList<KeywordBean>();
 		Connection con = null;
 		PreparedStatement pstmt = null;

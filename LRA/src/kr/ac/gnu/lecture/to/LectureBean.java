@@ -1,48 +1,54 @@
 package kr.ac.gnu.lecture.to;
 
+/*
+ * Lecture 정보를 담는 class
+ * 칼럼 : 아이디, 강의키워드, 강의이름, 강의링크, 강의순위, 강의취소여부
+ */
 public class LectureBean {
-	private String Id;
-	private String Keyword;
-	private String Name;
-	private String Link;
-	private int Rank;
-	private String CancelYN;
+	private String id;
+	private String lectureKeyword;
+	private String lectureName;
+	private String lectureLink;
+	private int lectureRank;
+	private String lectureCancelYN;
 	public String getId() {
-		return Id;
+		return id;
 	}
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
-	public String getKeyword() {
-		return Keyword;
+	public String getLectureKeyword() {
+		return lectureKeyword;
 	}
-	public void setKeyword(String keyword) {
-		Keyword = keyword;
+	public void setLectureKeyword(String lectureKeyword) {
+		this.lectureKeyword = lectureKeyword;
 	}
-	public String getName() {
-		return Name;
+	public String getLectureName() {
+		return lectureName;
 	}
-	public void setName(String name) {
-		Name = name;
+	public void setLectureName(String lectureName) {
+		this.lectureName = lectureName;
 	}
-	public String getLink() {
-		return Link;
+	public String getLectureLink() {
+		return lectureLink;
 	}
-	public void setLink(String link) {
-		Link = link;
+	public void setLectureLink(String lectureLink) {
+		this.lectureLink = lectureLink;
 	}
-	public int getRank() {
-		return Rank;
+	public int getLectureRank() {
+		return lectureRank;
 	}
-	public void setRank(int rank) {
-		Rank = rank;
+	public void setLectureRank(int lectureRank) {
+		this.lectureRank = lectureRank;
 	}
-	public String getCancelYN() {
-		return CancelYN;
+	public String getLectureCancelYN() {
+		return lectureCancelYN;
 	}
-	public void setCancelYN(String cancelYN) {
-		CancelYN = cancelYN;
+	public void setLectureCancelYN(String lectureCancelYN) {
+		this.lectureCancelYN = lectureCancelYN;
 	}
+	
+	
 	
 	
 	

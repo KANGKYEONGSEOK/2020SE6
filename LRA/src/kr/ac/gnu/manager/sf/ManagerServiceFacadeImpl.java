@@ -13,16 +13,21 @@ public class ManagerServiceFacadeImpl implements ManagerServiceFacade{
 		return instance;
 	}
 	
-	
+	/*
+	 * 관리자 로그인 메서드 로그인 성공여부를 판단한다.
+	 * 아이디와 패스워드의 입력값에 따라 
+	 * 익셉션을 던진다. 
+	 */
 	@Override
 	public void login(String id,String pw) throws ManagerNonExistentException,ManagerPwMismatchException{
 		// TODO Auto-generated method stub
 		ManagerBean bean=getManager(id);
-		if(bean==null) throw new ManagerNonExistentException("존재하지 않는 ID입니다.");
-		else{
-			if(! bean.getPw().equals(pw))
-			throw new ManagerPwMismatchException("존재하지 않는 PW입니다.");
-			else;
+		if(bean==null) {
+			throw new ManagerNonExistentException("존재하지 않는 ID입니다.");
+		}else {
+			if(! bean.getPw().equals(pw)) {
+				throw new ManagerPwMismatchException("존재하지 않는 PW입니다.");
+			}
 		}
 	}
 	@Override
