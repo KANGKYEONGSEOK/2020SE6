@@ -1,5 +1,6 @@
 package kr.ac.gnu.lecture.sf;
 
+import java.sql.Connection;
 import java.util.List;
 
 import kr.ac.gnu.lecture.exception.LectureNonExistentException;

@@ -56,7 +56,9 @@ public class LectureDAOImpl implements LectureDAO{
 			}
 			return lectureList;
 		} catch(Exception sqle) {
-			throw new DataAccessException(sqle.getMessage());			
+			System.out.println(sqle.getMessage()+"");
+			throw new DataAccessException(sqle.getMessage());
+			
 		} finally {
 			try{
 				if(rs!=null){rs.close(); rs=null; }
@@ -81,6 +83,43 @@ public class LectureDAOImpl implements LectureDAO{
 			query.append("select * from LECTURE where LECTURE_KEYWORD = ?");
 			DataSource dataSource=ServiceLocator.getInstance().getDataSource("jdbc/myoracle");
 			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(query.toString());
+			pstmt.setString(1,lectureKeyword);
+			rs = pstmt.executeQuery();
+			LectureBean lecture=null;
+			List<LectureBean> lectureList = new ArrayList<LectureBean>();
+			while(rs.next()){
+				lecture=new LectureBean();
+				lecture.setId(rs.getString("ID"));
+				lecture.setLectureKeyword(rs.getString("LECTURE_KEYWORD"));
+				lecture.setLectureName(rs.getString("LECTURE_NAME"));
+				lecture.setLectureRank(Integer.parseInt(rs.getString("LECTURE_RANK")));
+				lecture.setLectureLink(rs.getString("LECUTRN_LINK"));
+				lecture.setLectureCancelYN(rs.getString("LECTURE_CANCEL_YN"));
+				lectureList.add(lecture);
+			}
+			return lectureList;
+		} catch(Exception sqle) {
+			System.out.println(sqle.getMessage());
+			throw new DataAccessException(sqle.getMessage());			
+		} finally {
+			try{
+				if(rs!=null){rs.close(); rs=null; }
+				if(pstmt!=null){pstmt.close(); pstmt=null; }
+				if(con!=null){con.close(); con=null; }
+			}catch(Exception e){}		
+		}
+	}
+	
+	@Override
+	public  List<LectureBean> selectLecture(Connection con, String lectureKeyword) throws DataAccessException {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			StringBuffer query = new StringBuffer();
+			query.append("select * from LECTURE where LECTURE_KEYWORD = ?");
+
 			pstmt = con.prepareStatement(query.toString());
 			pstmt.setString(1,lectureKeyword);
 			rs = pstmt.executeQuery();
@@ -145,5 +184,64 @@ public class LectureDAOImpl implements LectureDAO{
 			}catch(Exception e){}		
 		}
 	}
-	
+	public List<LectureBean> selectLectureList(Connection con){
+		// TODO Auto-generated method stub
+		List<LectureBean> lectureList =new ArrayList<LectureBean>();
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			StringBuffer query = new StringBuffer();
+			query.append("select * from Lecture");
+			pstmt = con.prepareStatement(query.toString());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				LectureBean lecture=new LectureBean();
+				lecture.setId(rs.getString("ID"));
+				lecture.setLectureKeyword(rs.getString("LECTURE_KEYWORD"));
+				lecture.setLectureName(rs.getString("LECTURE_NAME"));
+				lecture.setLectureRank(Integer.parseInt(rs.getString("LECTURE_RANK")));
+				lecture.setLectureLink(rs.getString("LECUTRN_LINK"));
+				lecture.setLectureCancelYN(rs.getString("LECTURE_CANCEL_YN"));
+				lectureList.add(lecture);
+			}
+			return lectureList;
+		} catch(Exception sqle) {
+			System.out.println(sqle.getMessage()+"");
+			throw new DataAccessException(sqle.getMessage());
+			
+		} finally {
+			try{
+				if(rs!=null){rs.close(); rs=null; }
+				if(pstmt!=null){pstmt.close(); pstmt=null; }
+				if(con!=null){con.close(); con=null; }
+			}catch(Exception e){}		
+		}
+	}
+	@Override
+	public Boolean existKeyword(Connection con, String keyword) {
+		// TODO Auto-generated method stub
+		List<KeywordBean> v=new ArrayList<KeywordBean>();
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			StringBuffer query = new StringBuffer();
+			query.append("select * from LECTUREKEYWORD where LECTURE_KEYWORD=?  order by LECTURE_KEYWORD");
+			pstmt = con.prepareStatement(query.toString());
+			pstmt.setString(1,keyword);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				return true;
+			}
+			return false;
+		} catch(Exception sqle) {
+			throw new DataAccessException(sqle.getMessage());			
+		} finally {
+			try{
+				if(rs!=null){rs.close(); rs=null; }
+				if(pstmt!=null){pstmt.close(); pstmt=null; }
+				if(con!=null){con.close(); con=null; }
+			}catch(Exception e){}		
+		}
+	}
 }
