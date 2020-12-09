@@ -4,3 +4,5 @@ package kr.ac.gnu.common.dao;
 public class DataAccessException extends RuntimeException{
 	public DataAccessException(String msg){ super(msg); }
 }
+
+//
